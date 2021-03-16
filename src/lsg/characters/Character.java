@@ -190,7 +190,6 @@ public abstract class Character {
 	 * méthode abstraite computeBuff qui renvoie un float représentant un buff qui
 	 * correspond à un pourcentage qui amplifie une attaque
 	 *
-	 * @return
 	 */
 	protected abstract float computeBuff();
 
@@ -223,7 +222,6 @@ public abstract class Character {
 
 	private void drink(Drink drink) {
 		if (drink == null) return;
-		;
 		System.out.println(getName() + " drinks " + drink);
 		int newStam = getStamina() + drink.use();
 		newStam = (newStam < maxStamina) ? newStam : maxStamina;
@@ -277,6 +275,40 @@ public abstract class Character {
 	 */
 
 	public void pickUp(Collectible item){
+
+
+		//while((bag.getCapacity()>(bag.getWeight()+item.getWeigth()))){
+
+
+			bag.push(item);
+			//bag.getWeight()=bag.getWeight()+item.getWeigth();
+			//System.out.println("");
+		//}
+	}
+	public  Collectible pullOut(Collectible item){
+
+	return 	bag.pop(item);
+
+	}
+
+	public void printBag(){
+
+		bag.toString();
+		//System.out.println();
+	}
+
+	public int getBagCapacity(){
+		return bag.getCapacity();
+
+	}
+	public int getBagWeigth(){
+		return bag.getWeight();
+	}
+	public Collectible[] getBagItems () {
+		return bag.getItems();
+	}
+
+	public Bag setBag(Bag bag){
 
 	}
 

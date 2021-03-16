@@ -1,5 +1,6 @@
 package lsg.bags;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 public class Bag {
@@ -12,7 +13,9 @@ public class Bag {
      * @param capacity
      */
     public Bag( final int capacity) {
+
         this.capacity = capacity;
+       // items=new HashSet<>();
     }
 
     public int getCapacity() {
@@ -28,8 +31,9 @@ public class Bag {
      * @param item
      */
     public void push(Collectible item){
-        if ((getCapacity() > getWeight())) {
+        while ((getCapacity() > (weight+item.getWeigth()))) {
           items.add(item);
+          weight=weight+item.getWeigth();
         }
 
     }
@@ -40,12 +44,14 @@ public class Bag {
      * @return l'item retiré sinon return null
      */
     public Collectible pop(Collectible item){
-        if(items.contains(item)){
-           items.remove(item);
-           return item;
-        }else {
-            return null;
-        }
+       while (getCapacity() > (weight+item.getWeigth())) {
+           if (items.contains(item)) {
+               items.remove(item);
+               return item;
+           }
+           weight=weight+item.getWeigth();
+       }
+       return null;
     }
 
     /**
@@ -88,7 +94,7 @@ public class Bag {
         String msg = getClass()+" [ "+ size + " | "+ getWeight() + "/"+getCapacity()+"\n";
 
           if(size != 0){
-                msg+= " "+ getItems()+"["+getWeight()+"kg]" + "\n";
+                msg+= " "+ Arrays.toString(this.getItems()) +"["+getWeight()+"kg]" + "\n";
               /* for(Collectible item : items){
                 msg+= " "+item.toString() + "["+getWeight()+"kg]" + "\n";
             }*/
@@ -107,7 +113,9 @@ public class Bag {
      * @param into
      */
     public static void transfer(Bag from, Bag into){
-
+       while (from.getCapacity()< into.getCapacity()){
+           into.items= from.items;
+       }
 
     }
 
